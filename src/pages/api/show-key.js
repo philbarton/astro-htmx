@@ -1,8 +1,7 @@
 // src/pages/api/check-cookie.js
 export const prerender = false;
 
-export async function GET({cookies, env}) {
-    const cookie = cookies.get("user")?.value || "";
+export async function GET({env}) {
 
     const secret = import.meta.env.MY_API_KEY;
     const variable = import.meta.env.MY_VARIABLE;
@@ -14,7 +13,7 @@ export async function GET({cookies, env}) {
         text = await env.MY_WORKER.fetch("https://dummy/")?.text();
     }
     return new Response(
-        `<p>${variable}</p><p>${secret}</p><p>${cookie}</p><p>${mode}</p><p>${text}</p>`,
-        { headers: { "Content-Type": "text/html" } }
+        `<p>${variable}</p><p>${secret}</p><p>${mode}</p><p>${text}</p>`,
+        {headers: {"Content-Type": "text/html"}}
     );
 }
