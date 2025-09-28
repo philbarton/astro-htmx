@@ -3,10 +3,10 @@ export const prerender = false;
 
 export async function GET() {
 
-    const apiKey = import.meta.env.MY_API_KEY;
+    const variable = import.meta.env.MY_VARIABLE;
 
     return new Response(
-        `<p>${apiKey}</p>`,
+        `<p>${variable}</p>`,
         { headers: { "Content-Type": "text/html" } }
     );
 }
