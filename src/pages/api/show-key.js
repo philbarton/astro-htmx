@@ -3,12 +3,8 @@ export const prerender = false;
 
 export async function GET({request, env}) {
 
-    let text = 'nah';
     if (env?.MY_WORKER) {
-        text = await env.MY_WORKER.fetch("http://localhost:8080");
+        return await env.MY_WORKER.fetch("http://localhost:8080");
     }
-    return new Response(
-        `<p>text : ${text}</p><p>env : ${env}</p>`,
-        {headers: {"Content-Type": "text/html"}}
-    );
+
 }
