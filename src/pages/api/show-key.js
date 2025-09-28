@@ -7,12 +7,12 @@ export async function GET({cookies, env}) {
     const secret = import.meta.env.MY_API_KEY;
     const variable = import.meta.env.MY_VARIABLE;
     let mode = import.meta.env.MODE;
-    let response;
+    let text = 'nah';
     if (env?.MY_WORKER) {
+        console.log("found")
         // Cloudflare dev/prod
-        response = await env.MY_WORKER.fetch("https://dummy/");
+        text = await env.MY_WORKER.fetch("https://dummy/")?.text();
     }
-    const text = await response?.text();
     return new Response(
         `<p>${variable}</p><p>${secret}</p><p>${cookie}</p><p>${mode}</p><p>${text}</p>`,
         { headers: { "Content-Type": "text/html" } }
